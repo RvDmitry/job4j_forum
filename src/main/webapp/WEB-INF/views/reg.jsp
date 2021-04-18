@@ -16,15 +16,11 @@
     <table>
         <tr>
             <td>UserName:</td>
-            <td><input type='text' name='name'></td>
+            <td><input type='text' name='username'></td>
         </tr>
         <tr>
             <td>Password:</td>
             <td><input type='password' name='password'/></td>
-        </tr>
-        <tr>
-            <td>Email:</td>
-            <td><input type='email' name='email'/></td>
         </tr>
         <tr>
             <td colspan='2'><input name="submit" type="submit" value="Сохранить" /></td>

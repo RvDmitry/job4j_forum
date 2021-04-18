@@ -12,7 +12,7 @@
     <title>Форум: Авторизация</title>
 </head>
 <body>
-<a href="<c:url value='/reg'/>">Форум: Регистрация</a>
+<a href="<c:url value='/reg'/>">Регистрация</a>
 <c:if test="${not empty errorMessage}">
     <div style="color:red; font-weight: bold; margin: 30px 0px;">
             ${errorMessage}
@@ -22,7 +22,7 @@
     <table>
         <tr>
             <td>UserName:</td>
-            <td><input type='text' name='name'></td>
+            <td><input type='text' name='username'></td>
         </tr>
         <tr>
             <td>Password:</td>

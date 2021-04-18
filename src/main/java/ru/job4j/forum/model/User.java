@@ -13,38 +13,29 @@ import java.util.Objects;
 @Table(name = "users")
 public class User {
     /**
-     * Идентификатор.
+     * Идентификатор пользователя.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     /**
-     * Имя.
-     */
-    private String name;
-    /**
-     * Пароль.
+     * Пароль пользователя.
      */
     private String password;
     /**
-     * Email.
+     * Имя пользователя.
      */
-    private String email;
-
+    private String username;
     /**
-     * Фабрика создает пользователя.
-     * @param name Имя.
-     * @param password Пароль.
-     * @param email Email.
-     * @return Пользователь.
+     * Роль пользователя.
      */
-    public static User of(String name, String password, String email) {
-        User user = new User();
-        user.name = name;
-        user.password = password;
-        user.email = email;
-        return user;
-    }
+    @ManyToOne
+    @JoinColumn(name = "authority_id")
+    private Authority authority;
+    /**
+     * Состояние учетной записи пользователя. Включена или нет.
+     */
+    private boolean enabled;
 
     /**
      * Метод возвращает идентификатор.
@@ -60,22 +51,6 @@ public class User {
      */
     public void setId(int id) {
         this.id = id;
-    }
-
-    /**
-     * Метод возвращает имя.
-     * @return Имя.
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Метод задает имя.
-     * @param name Имя.
-     */
-    public void setName(String name) {
-        this.name = name;
     }
 
     /**
@@ -95,19 +70,51 @@ public class User {
     }
 
     /**
-     * Метод возвращает email.
-     * @return Email.
+     * Метод возвращает имя.
+     * @return Имя.
      */
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
     /**
-     * Метод задает email.
-     * @param email Email.
+     * Метод задает имя.
+     * @param username Имя.
      */
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * Метод возвращает роль.
+     * @return Роль.
+     */
+    public Authority getAuthority() {
+        return authority;
+    }
+
+    /**
+     * Метод задает роль.
+     * @param authority Роль.
+     */
+    public void setAuthority(Authority authority) {
+        this.authority = authority;
+    }
+
+    /**
+     * Метод проверяет состояние учетной записи пользователя. Включена учетная запись или нет.
+     * @return Состояние учетной записи.
+     */
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    /**
+     * Метод задает состояние учетной записи.
+     * @param enabled Состояние учетной записи.
+     */
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override
@@ -119,14 +126,11 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return id == user.id
-                && Objects.equals(name, user.name)
-                && Objects.equals(password, user.password)
-                && Objects.equals(email, user.email);
+        return id == user.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, password, email);
+        return Objects.hash(id);
     }
 }
