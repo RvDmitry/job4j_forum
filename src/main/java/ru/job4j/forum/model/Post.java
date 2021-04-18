@@ -1,5 +1,6 @@
 package ru.job4j.forum.model;
 
+import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Objects;
 
@@ -9,10 +10,14 @@ import java.util.Objects;
  * @author Dmitry Razumov
  * @version 1
  */
+@Entity
+@Table(name = "posts")
 public class Post {
     /**
      * Идентификатор темы.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     /**
      * Наименование темы.
@@ -21,23 +26,11 @@ public class Post {
     /**
      * Описание темы.
      */
-    private String desc;
+    private String description;
     /**
      * Дата создания темы.
      */
     private Calendar created;
-
-    /**
-     * Фабрика создает тему.
-     * @param name Наименование.
-     * @return Тема.
-     */
-    public static Post of(String name) {
-        Post post = new Post();
-        post.name = name;
-        post.created = Calendar.getInstance();
-        return post;
-    }
 
     /**
      * Метод возвращает идентификатор.
@@ -75,16 +68,16 @@ public class Post {
      * Метод возвращает описание.
      * @return Описание.
      */
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
     /**
      * Метод задает описание.
-     * @param desc Описание.
+     * @param description Описание.
      */
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**
@@ -114,12 +107,12 @@ public class Post {
         Post post = (Post) o;
         return id == post.id
                 && Objects.equals(name, post.name)
-                && Objects.equals(desc, post.desc)
+                && Objects.equals(description, post.description)
                 && Objects.equals(created, post.created);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, desc, created);
+        return Objects.hash(id, name, description, created);
     }
 }

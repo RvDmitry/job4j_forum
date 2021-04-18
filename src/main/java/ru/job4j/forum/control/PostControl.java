@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.job4j.forum.model.Post;
 import ru.job4j.forum.service.PostService;
 
+import java.util.Calendar;
+
 /**
  * Class PostControl
  *
@@ -23,6 +25,9 @@ public class PostControl {
 
     @PostMapping("/post/create")
     public String create(@ModelAttribute Post post) {
+        if (post.getCreated() == null) {
+            post.setCreated(Calendar.getInstance());
+        }
         posts.create(post);
         return "redirect:/index";
     }

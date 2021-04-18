@@ -1,5 +1,6 @@
 package ru.job4j.forum.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
@@ -8,10 +9,14 @@ import java.util.Objects;
  * @author Dmitry Razumov
  * @version 1
  */
+@Entity
+@Table(name = "users")
 public class User {
     /**
      * Идентификатор.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     /**
      * Имя.

@@ -14,7 +14,7 @@
 <body>
 <div class="p-3">
     <p>Тема: ${post.name}</p>
-    <p>Описание: ${post.desc}</p>
+    <p>Описание: ${post.description}</p>
 </div>
 <div class="p-3">
     <form action="">

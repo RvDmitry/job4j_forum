@@ -2,46 +2,56 @@ package ru.job4j.forum.service;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.forum.model.User;
+import ru.job4j.forum.store.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Class UserService
- *
+ * Сервис-класс по работе с пользователями.
  * @author Dmitry Razumov
  * @version 1
  */
 @Service
 public class UserService {
+    /**
+     * Ссылка на хранилище пользователей.
+     */
+    private final UserRepository users;
 
-    private final AtomicInteger userId = new AtomicInteger();
+    /**
+     * Конструктор инициализирует сервис-класс и ссылку на хранилище.
+     * @param users Ссылка на хранилище.
+     */
+    public UserService(UserRepository users) {
+        this.users = users;
+    }
 
-    private final List<User> users = new ArrayList<>();
-
+    /**
+     * Метод возвращает список всех пользователей из хранилища.
+     * @return Список пользователей.
+     */
     public List<User> getAll() {
-        return users;
+        List<User> rsl = new ArrayList<>();
+        users.findAll().forEach(rsl::add);
+        return rsl;
     }
 
+    /**
+     * Метод сохраняет или обновляет пользователя в хранилище.
+     * @param user Пользователь.
+     */
     public void save(User user) {
-        if (user.getId() == 0) {
-            user.setId(userId.incrementAndGet());
-            users.add(user);
-        } else {
-            User u = findById(user.getId());
-            u.setName(user.getName());
-            u.setPassword(user.getPassword());
-            u.setEmail(user.getEmail());
-        }
+        users.save(user);
     }
 
+    /**
+     * Метод ищет пользователя в хранилище по его идентификатору.
+     * @param id Идентификатор.
+     * @return Пользователь.
+     */
     public User findById(int id) {
-        for (User user : users) {
-            if (user.getId() == id) {
-                return user;
-            }
-        }
-        return null;
+        return users.findById(id).orElse(null);
     }
 }

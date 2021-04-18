@@ -21,9 +21,9 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="name" class="col-sm-1 col-form-label">Описание:</label>
+            <label for="description" class="col-sm-1 col-form-label">Описание:</label>
             <div class="col-sm-10">
-                <input type='text' id="desc" name='desc' value="${post.desc}">
+                <input type='text' id="description" name='description' value="${post.description}">
             </div>
         </div>
         <div class="form-group row">

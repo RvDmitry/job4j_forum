@@ -1,3 +1,4 @@
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
@@ -33,6 +34,7 @@
             <tr>
                 <th scope="col">Тема</th>
                 <th scope="col">Описание</th>
+                <th scope="col">Создан</th>
                 <th scope="col">Edit</th>
             </tr>
             </thead>
@@ -40,7 +42,8 @@
             <c:forEach items="${posts}" var="post">
                 <tr>
                     <td><a href="<c:url value='/post?id=${post.id}'/>"><c:out value="${post.name}"/></a></td>
-                    <td><c:out value="${post.desc}"/></td>
+                    <td><c:out value="${post.description}"/></td>
+                    <td><c:out value="${post.created.getTime()}"/></td>
                     <td><a href="<c:url value='/edit?id=${post.id}'/>">Edit</a></td>
                 </tr>
             </c:forEach>
