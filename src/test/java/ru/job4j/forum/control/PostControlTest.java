@@ -12,6 +12,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import ru.job4j.forum.Main;
 import ru.job4j.forum.model.Post;
 import ru.job4j.forum.service.PostService;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -36,6 +38,6 @@ public class PostControlTest {
                 .andExpect(status().is3xxRedirection());
         ArgumentCaptor<Post> argument = ArgumentCaptor.forClass(Post.class);
         verify(posts).create(argument.capture());
-        Assertions.assertEquals("Куплю ладу-грант. Дорого.", argument.getValue().getName());
+        assertEquals("Куплю ладу-грант. Дорого.", argument.getValue().getName());
     }
 }
