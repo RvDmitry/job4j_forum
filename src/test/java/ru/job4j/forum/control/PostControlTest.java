@@ -32,11 +32,11 @@ public class PostControlTest {
     @WithMockUser
     public void shouldReturnDefaultMessage() throws Exception {
         this.mockMvc.perform(post("/post/create")
-                .param("name", "Куплю ладу-грант. Дорого."))
+                .param("name", "Куплю ладу-гранту. Дорого."))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection());
         ArgumentCaptor<Post> argument = ArgumentCaptor.forClass(Post.class);
         verify(posts).create(argument.capture());
-        assertEquals("Куплю ладу-грант. Дорого.", argument.getValue().getName());
+        assertEquals("Куплю ладу-гранту. Дорого.", argument.getValue().getName());
     }
 }
