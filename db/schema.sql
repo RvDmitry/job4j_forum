@@ -2,7 +2,7 @@ create table posts (
    id serial primary key,
    name varchar(2000),
    description text,
-   created timestamp not null
+   created timestamp not null default current_timestamp
 );
 
 CREATE TABLE authorities (
@@ -17,3 +17,5 @@ CREATE TABLE users (
    enabled boolean default true,
    authority_id int not null references authorities(id)
 );
+
+insert into posts (name) values ('auto1');
